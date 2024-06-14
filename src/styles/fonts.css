@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Coffee Spark';
+    src: url('fonts/Play Story.otf') format('opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Play Story', sans-serif;
+}
