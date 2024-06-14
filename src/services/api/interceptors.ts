@@ -1,5 +1,6 @@
 import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import { handleResponse, handleError, ErrorResponseOptions } from './handlers';  // Importamos las funciones de manejo de respuestas y errores desde './handlers', y la interfaz 'ErrorResponseOptions' para tipar AxiosError
+import { handleResponse, handleError } from './handlers';  // Importamos las funciones de manejo de respuestas y errores desde './handlers', y la interfaz 'ErrorResponseOptions' para tipar AxiosError
+import { ErrorResponseOptions } from '@interfaces/api';
 
 // Función para configurar interceptores de respuestas y errores
 export const setupInterceptors = (instance: AxiosInstance) => {
