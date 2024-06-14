@@ -3,11 +3,8 @@ import { CardProps } from '@interfaces/components';
 import './index.css';
 
 const Card: React.FC<CardProps> = ({ character }) => {
-
-    // Estado para manejar la visibilidad del detalle del personaje
     const [showDetail, setShowDetail] = useState<boolean>(false);
 
-    // Función para alternar la visibilidad del detalle del personaje
     const toggleDetail = () => {
         setShowDetail(!showDetail);
     };
@@ -19,13 +16,24 @@ const Card: React.FC<CardProps> = ({ character }) => {
             {showDetail && (
                 <div className="modal">
                     <div className="modal-content">
-                        <h2>{character.name}</h2>
-                        {/* <p>{character.description}</p> */}
-                        <button onClick={toggleDetail} className="close-button">Close</button>
+                        <div className="modal-image">
+                            <img src={character.image} alt={character.name} />
+                        </div>
+                        <div className="modal-details">
+                            <h2>{character.name}</h2>
+                            <p><strong>Gender:</strong> {character.gender}</p>
+                            <p><strong>Species:</strong> {character.species}</p>
+                            <p><strong>Status:</strong> {character.status}</p>
+                            <p><strong>Location:</strong> {character.location.name}</p>
+                            <p><strong>Origin:</strong> {character.origin.name}</p>
+                        </div>
+                        <button onClick={toggleDetail} className="close-button">Cerrar</button>
                     </div>
                 </div>
             )}
-            <button onClick={toggleDetail} className="detail-button">View Details</button>
+            <button onClick={toggleDetail} className="detail-button">
+                Ver detalles
+            </button>
         </div>
     );
 };
