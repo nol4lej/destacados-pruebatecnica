@@ -25,7 +25,7 @@ npm install
 
 3. Instala las dependencias:
 ```
-   npm run dev
+npm run dev
 ```
 
 ## Estructura del Proyecto
