@@ -1,14 +1,9 @@
+import { ErrorResponseOptions } from '@interfaces/api';
 import { AxiosError, AxiosResponse } from 'axios';
 
 /*
   Este archivo (handlers.ts) se utiliza para gestionar el manejo de errores desde los interceptores.
 */
-
-// Definición de las opciones para manejar respuestas de error
-export interface ErrorResponseOptions {
-  error?: string;
-  message?: string;
-}
 
 // Función para manejar respuestas exitosas
 export const handleResponse = <T>(response: AxiosResponse<T>): T => {
