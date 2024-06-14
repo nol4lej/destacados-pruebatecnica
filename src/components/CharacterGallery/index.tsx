@@ -1,54 +1,40 @@
+import { useEffect, useState } from 'react';
+import './index.css';
 import Card from "@components/Card";
 import useApi from "@hooks/useApi";
 import { Character } from "@interfaces/api";
-import { useEffect, useState } from "react";
-import './index.css';
 import { FilterState, PageInfoOptions } from "@interfaces/components";
 import Filter from "@components/Filter";
 import { filterCharacters, sortCharacters } from "@utils/character.utils";
 import { getCurrentPage, updateUrlParams } from "@utils/pagination.utils";
 import ENV from "@config/env";
-
-/* 
-   Componente HomePage que muestra una lista de personajes obtenidos desde una API.
-   Incluye funcionalidad para cargar los datos, filtrarlos por estado y especie,
-   y ordenarlos por género y nombre. Utiliza el componente Filter para gestionar
-   los filtros y Card para mostrar cada personaje en una tarjeta.
-*/
+import Loader from "@components/Loader";
+import Pagination from "@components/Pagination";
 
 const CharacterGallery = () => {
-
-    // Utiliza el hook useApi para manejar las solicitudes a la API
+    
+    // Estado y funciones para la gestión de la API y la paginación
     const { response, sendRequest } = useApi();
-    
-    // Estado para almacenar el filtro actual de estado y especie
     const [filter, setFilter] = useState<FilterState>({ status: '', species: '' });
-    
-    // Estado para almacenar la URL de la página actual de la API de personajes
-    const [currentPageUrl, setCurrentPageUrl] = useState<string>(ENV.CHARACTER_URL + `?page=${getCurrentPage()}`);
-    
-    // Estado para almacenar la información de la página actual (conteo, páginas, siguiente y anterior)
+    const [currentPage, setCurrentPage] = useState<number>(parseInt(getCurrentPage())); // Mantenemos currentPage como número
     const [pageInfo, setPageInfo] = useState<PageInfoOptions>({
         count: 0,
         pages: 0,
         next: null,
         prev: null
     });
-  
-    // Efecto para cargar datos de personajes al montar el componente o cuando cambia la página actual
-    useEffect(() => {  
+
+    // Efecto para cargar datos cuando currentPage cambia
+    useEffect(() => {
         fetchData();
-        // Desactiva temporalmente la regla de ESLint react-hooks/exhaustive-deps
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentPageUrl]); // Vacío para que se ejecute solo una vez al montar el componente
-  
-    // Función asincrónica para enviar la solicitud a la API y actualizar el estado con los datos obtenidos
+    }, [currentPage]);
+
+    // Función asincrónica para obtener datos de la API
     const fetchData = async () => {
         try {
-            const result = await sendRequest({ url: currentPageUrl });
-            
+            const result = await sendRequest({ url: `${ENV.CHARACTER_URL}?page=${currentPage}` });
             if (result && result.info) {
-                // Actualiza la información de la página con los datos recibidos
                 setPageInfo({
                     count: result.info.count,
                     pages: result.info.pages,
@@ -61,46 +47,51 @@ const CharacterGallery = () => {
         }
     };
 
-    // Función para manejar cambios en el filtro desde el componente Filter
+    // Función para manejar cambios en el filtro
     const handleFilterChange = (newFilter: FilterState) => {
         setFilter(newFilter);
+        // Al cambiar el filtro, volvemos a la primera página
+        setCurrentPage(1);
     };
 
-    // Función para manejar cambios de página (anterior/siguiente)
-    const handlePageChange = (url: string) => {
-        setCurrentPageUrl(url); // Actualiza la URL de la página actual
-        updateUrlParams(url); // Actualiza los parámetros de la URL en la barra de direcciones
+    // Función para manejar cambios de página
+    const handlePageChange = (page: number) => {
+        setCurrentPage(page); // Actualizamos la página actual
+        updateUrlParams(`${ENV.CHARACTER_URL}?page=${page}`); // Actualizamos la URL con la página nueva
     };
 
     return (
         <div className="character-gallery-container">
-            {response.loading && <p className="message">Cargando...</p>}
-            {response.error && <p className="message">Error: {response.error.message}</p>}
+
+            {response.loading && <Loader />}
+
+            {response.error && (
+                <div className="message error-message">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64" className="error-icon">
+                        <path d="M12 1C5.92 1 1 5.92 1 12s4.92 11 11 11 11-4.92 11-11S18.08 1 12 1zm0 19.5c-4.14 0-7.5-3.36-7.5-7.5S7.86 5.5 12 5.5s7.5 3.36 7.5 7.5-3.36 7.5-7.5 7.5zM12 9c-.55 0-1 .45-1 1v6c0 .55.45 1 1 1s1-.45 1-1v-6c0-.55-.45-1-1-1zm0 11c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/>
+                    </svg>
+                    <p>¡Oops! Hubo un problema al cargar los personajes. Por favor, inténtalo de nuevo más tarde.</p>
+                </div>
+            )}
+
             {response.data && (
-                <div className="cards-container">
+                <div >
                     <Filter onFilterChange={handleFilterChange} />
                     <div className="cards-container">
-                        {sortCharacters(filterCharacters(response.data.results, filter))
-                            .map((char: Character) => (
-                                <Card key={char.id} character={char} />
-                            ))}
+                        {sortCharacters(filterCharacters(response.data.results, filter)).map((char: Character) => (
+                            <Card key={char.id} character={char} />
+                        ))}
                     </div>
-                    <div className="pagination-buttons">
-                        {pageInfo.prev && (
-                            <button onClick={() => handlePageChange(pageInfo.prev!)}>
-                                Anterior
-                            </button>
-                        )}
-                        {pageInfo.next && (
-                            <button onClick={() => handlePageChange(pageInfo.next!)}>
-                                Siguiente
-                            </button>
-                        )}
-                    </div>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={pageInfo.pages}
+                        onPageChange={handlePageChange}
+                    />
                 </div>
+
             )}
         </div>
     );
-}
+};
 
 export default CharacterGallery;
