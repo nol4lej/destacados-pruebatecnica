@@ -9,5 +9,5 @@ export interface UseApiReturnType {
         error: AxiosError<ErrorResponseOptions> | null; // Error de respuesta API
         loading: boolean; // Indicador de carga
     };
-    sendRequest: (config: AxiosRequestConfig) => Promise<void>; // Función para enviar una solicitud API
+    sendRequest: (config: AxiosRequestConfig) => Promise< ApiResponse | undefined>;
 }
