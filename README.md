@@ -13,14 +13,20 @@ El objetivo de este proyecto es consumir la API de Rick and Morty para listar lo
 ## Configuración del Proyecto
 
 1. Clona el repositorio:
-   git clone [<URL del repositorio>](https://github.com/nol4lej/destacados-pruebatecnica.git)
-   cd destacados-pruebatecnica
+```
+git clone [<URL del repositorio>](https://github.com/nol4lej/destacados-pruebatecnica.git)
+cd destacados-pruebatecnica
+```
 
-2. Instala las dependencias::
-   npm install
+2. Instala las dependencias:
+```
+npm install
+```
 
-3. Instala las dependencias::
+3. Instala las dependencias:
+```
    npm run dev
+```
 
 ## Estructura del Proyecto
 
@@ -32,14 +38,14 @@ Se utilizan archivos barrel para exportar módulos desde una sola entrada, facil
 
 ### Axios Service
 
-Se creó una instancia de Axios con un interceptor para manejar respuestas y errores de la API. Esto se encuentra en el archivo src/services/api/index.ts
+Se creó una instancia de Axios con un interceptor para manejar respuestas y errores de la API. Esto se encuentra en el archivo `src/services/api/index.ts`
 
 ### Hook Personalizado: useApi
 El hook useApi se utiliza para realizar peticiones HTTP y manejar el estado de las mismas.
 
 ### Paginación
 
-La API de Rick and Morty envía datos paginados. Se implementó una paginación utilizando la URL ?page=1 para navegar entre las páginas de resultados.
+La API de Rick and Morty envía datos paginados. Se implementó una paginación utilizando la URL `?page=1` para navegar entre las páginas de resultados.
 
 ## Estructura del Proyecto
 
@@ -58,5 +64,6 @@ La API de Rick and Morty envía datos paginados. Se implementó una paginación 
 ## Alias de Directorios
 
 Para facilitar la importación de módulos, se utilizan alias de directorios configurados con @vitejs/plugin-react-swc. Por ejemplo, el alias @components se usa para importar componentes de manera más sencilla.
-
-`import CharacterGallery from '@components/CharacterGallery';`
+```
+import CharacterGallery from '@components/CharacterGallery';
+```
