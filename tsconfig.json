@@ -30,6 +30,7 @@
       "@utils/*": ["src/utils/*"],
       "@hooks/*": ["src/hooks/*"],
       "@interfaces/*": ["src/interfaces/*"],
+      "@pages/*": ["src/pages/*"],
     }
   },
   "include": ["src"],
