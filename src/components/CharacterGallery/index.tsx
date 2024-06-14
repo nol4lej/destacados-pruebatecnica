@@ -73,7 +73,7 @@ const CharacterGallery = () => {
     };
 
     return (
-        <div className="homepage-container">
+        <div className="character-gallery-container">
             {response.loading && <p className="message">Cargando...</p>}
             {response.error && <p className="message">Error: {response.error.message}</p>}
             {response.data && (
