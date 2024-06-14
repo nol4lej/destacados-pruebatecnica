@@ -8,17 +8,14 @@
     box-sizing: border-box;
 }
 
-.cards-container {
+.logo-container {
+    margin-bottom: 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
-    width: 100%;
 }
 
-.message {
-    font-size: 1.5em;
-    text-align: center;
-    margin-top: 20px;
+.logo-img {
+    max-width: 80%;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.623));
 }
