@@ -5,7 +5,7 @@ import { AxiosError, AxiosResponse } from 'axios';
 */
 
 // Definición de las opciones para manejar respuestas de error
-interface ErrorResponseOptions {
+export interface ErrorResponseOptions {
   error?: string;
   message?: string;
 }
