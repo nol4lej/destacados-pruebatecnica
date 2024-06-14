@@ -2,24 +2,24 @@
     Definición de las opciones para manejar respuestas resueltas
 */
 
-interface Info {
+export interface Info {
     count: number;
     pages: number;
     next: string | null;
     prev: string | null;
 }
 
-interface Origin {
+export interface Origin {
     name: string;
     url: string;
 }
 
-interface Location {
+export interface Location {
     name: string;
     url: string;
 }
 
-interface Character {
+export interface Character {
     id: number;
     name: string;
     status: string;
