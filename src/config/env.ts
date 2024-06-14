@@ -1,9 +1,9 @@
-interface ConfigOptions {
+interface EnvOptions {
     CHARACTER_URL: string;
 }
 
-const CONFIG: ConfigOptions = {
+const ENV: EnvOptions = {
     CHARACTER_URL: import.meta.env.VITE_CHARACTER_URL,
 };
 
-export default CONFIG;
+export default ENV;
