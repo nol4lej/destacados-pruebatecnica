@@ -32,23 +32,25 @@ const Filter: React.FC<FilterProps> = ({ onFilterChange }) => {
     };
 
     return (
-        <div className="filters">
-            <label>
-                Status:
-                <select name="status" value={filter.status} onChange={handleFilterChange}>
-                    <option value="">Todos</option>
-                    <option value="Alive">Vivo</option>
-                    <option value="Dead">Muerto</option>
-                </select>
-            </label>
-            <label>
-                Species:
-                <select name="species" value={filter.species} onChange={handleFilterChange}>
-                    <option value="">Todas</option>
-                    <option value="Human">Humano</option>
-                    <option value="Alien">Alienígena</option>
-                </select>
-            </label>
+        <div className='filters-container'>
+            <div className="filters">
+                <label>
+                    Status:
+                    <select name="status" value={filter.status} onChange={handleFilterChange}>
+                        <option value="">Todos</option>
+                        <option value="Alive">Vivo</option>
+                        <option value="Dead">Muerto</option>
+                    </select>
+                </label>
+                <label>
+                    Species:
+                    <select name="species" value={filter.species} onChange={handleFilterChange}>
+                        <option value="">Todas</option>
+                        <option value="Human">Humano</option>
+                        <option value="Alien">Alienígena</option>
+                    </select>
+                </label>
+            </div>
         </div>
     );
 };
