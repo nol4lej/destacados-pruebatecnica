@@ -1,6 +1,6 @@
 .app-container {
     min-height: 100vh; /* Asegura que el contenedor cubra toda la pantalla visible */
-    background-image: url('../assets/bg.png');
+    background-image: url('bg.png');
     background-size: cover; /* Cubre todo el contenedor */
     background-position: center; /* Centra la imagen */
     display: flex;
