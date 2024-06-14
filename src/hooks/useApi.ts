@@ -18,7 +18,6 @@ const useApi = (): UseApiReturnType => {
     try {
       // Enviar la solicitud API utilizando la instancia configurada de Axios (por defecto es GET)
       const response: AxiosResponse<ApiResponse> = await api.request<ApiResponse>(config);
-      console.log(response.data);
 
       // Actualizar el estado con los datos recibidos y sin errores
       setResponse({ data: response.data, error: null, loading: false });
