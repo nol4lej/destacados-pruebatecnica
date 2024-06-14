@@ -1,10 +1,13 @@
-import './index.css';
 import { useState } from 'react';
-import { Character } from '@interfaces/api'
+import { CardProps } from '@interfaces/components/CardPropsOptions';
+import './index.css';
 
-const Card = ({ character: Character }) => {
-    const [showDetail, setShowDetail] = useState(false);
+const Card: React.FC<CardProps> = ({ character }) => {
 
+    // Estado para manejar la visibilidad del detalle del personaje
+    const [showDetail, setShowDetail] = useState<boolean>(false);
+
+    // Función para alternar la visibilidad del detalle del personaje
     const toggleDetail = () => {
         setShowDetail(!showDetail);
     };
@@ -17,7 +20,7 @@ const Card = ({ character: Character }) => {
                 <div className="modal">
                     <div className="modal-content">
                         <h2>{character.name}</h2>
-                        <p>{character.description}</p>
+                        {/* <p>{character.description}</p> */}
                         <button onClick={toggleDetail} className="close-button">Close</button>
                     </div>
                 </div>
