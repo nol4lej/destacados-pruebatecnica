@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardProps } from '@interfaces/components/CardPropsOptions';
+import { CardProps } from '@interfaces/components';
 import './index.css';
 
 const Card: React.FC<CardProps> = ({ character }) => {
